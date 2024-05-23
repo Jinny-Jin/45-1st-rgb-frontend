@@ -13,8 +13,6 @@ function ListBottom() {
   const limit = searchParams.get("limit") || shopContent?.length;
   const pageCount = Math.ceil(shopContent?.length / 4) || 0;
 
-  //데이터 패치 상단으로 올리기
-
   useEffect(() => {
     const url = `${API_ADDRESS_ORDERS}products/all?limit=${limit}&offset=${offset}`;
 
@@ -46,13 +44,12 @@ function ListBottom() {
 
   const movePage = pageNumber => {
     searchParams.set("offset", (pageNumber - 1) * 4);
-    searchParams.set("limit", 4);
     setSearchParams(searchParams);
   };
 
   return (
     <div className="listBottom">
-      <div className="bottomTop">
+      <div className="pagination">
         <div className="category">
           <span onClick={showAll}>All</span>
           <span onClick={showFour}>
@@ -64,14 +61,14 @@ function ListBottom() {
           </span>
         </div>
       </div>
-      <div className="bottomBottom">
-        <div className="bottomLeft">
+      <div className="itemList">
+        <div className="listSorting">
           <LeftFilter
             shopContent={shopContent}
             setShopContent={setShopContent}
           />
         </div>
-        <div className="bottomRight">
+        <div className="listMain">
           <div className="artworkBox">
             {shopContent.map(art => {
               return (
