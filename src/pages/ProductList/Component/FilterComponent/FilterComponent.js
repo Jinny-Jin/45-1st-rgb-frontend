@@ -3,6 +3,20 @@ import React, { useState } from "react";
 function FilterComponent({ shopContent, setShopContent }) {
   const [show, setShow] = useState(false);
 
+  const handleSort = sort => {
+    const copy = [...shopContent];
+    copy.sort((a, b) => {
+      if (sort === "price") {
+        return Number(a.price) < Number(b.price) ? -1 : 1;
+      } else if (sort === "abc") {
+        return a.title.toUpperCase() < b.title.toUpperCase() ? -1 : 1;
+      } else {
+        return 0;
+      }
+    });
+    setShopContent(copy);
+  };
+
   return (
     <div className="filterContent">
       <div className="priceAndButton">
@@ -11,7 +25,7 @@ function FilterComponent({ shopContent, setShopContent }) {
             setShow(!show);
           }}
         >
-          전체보기
+          정렬하기
         </span>
         <button
           onClick={() => {
@@ -34,27 +48,7 @@ function FilterComponent({ shopContent, setShopContent }) {
             <p className="sorting">
               <button
                 className="sortingButton"
-                onClick={() => {
-                  let thirdCopy = [...shopContent];
-                  thirdCopy.sort((a, b) =>
-                    a.categories_id < b.categories_id ? -1 : 1
-                  );
-                  setShopContent(thirdCopy);
-                }}
-              >
-                전체 보기
-              </button>
-            </p>
-            <p className="sorting">
-              <button
-                className="sortingButton"
-                onClick={() => {
-                  let secondCopy = [...shopContent];
-                  secondCopy.sort((a, b) =>
-                    Number(a.price) < Number(b.price) ? -1 : 1
-                  );
-                  setShopContent(secondCopy);
-                }}
+                onClick={() => handleSort("price")}
               >
                 가격순
               </button>
@@ -62,15 +56,9 @@ function FilterComponent({ shopContent, setShopContent }) {
             <p className="sorting">
               <button
                 className="sortingButton"
-                onClick={() => {
-                  let copy = [...shopContent];
-                  copy.sort((a, b) =>
-                    a.title.toUpperCase() < b.title.toUpperCase() ? -1 : 1
-                  );
-                  setShopContent(copy);
-                }}
+                onClick={() => handleSort("abc")}
               >
-                ABC순
+                이름순
               </button>
             </p>
           </div>
