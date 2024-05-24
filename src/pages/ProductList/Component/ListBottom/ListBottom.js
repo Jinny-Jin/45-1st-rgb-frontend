@@ -11,7 +11,9 @@ function ListBottom() {
   const [page, setPage] = useState(false);
   const offset = searchParams.get("offset") || 0;
   const limit = searchParams.get("limit") || shopContent?.length;
-  const pageCount = Math.ceil(shopContent?.length / 4) || 0;
+  const pageCount = new Array(Math.ceil(shopContent?.length / 4))
+    .fill(0)
+    .map((_, i) => i + 1);
 
   useEffect(() => {
     const url = `${API_ADDRESS_ORDERS}products/all?limit=${limit}&offset=${offset}`;
@@ -88,7 +90,7 @@ function ListBottom() {
                       movePage(page);
                     }}
                   >
-                    page
+                    {page}
                   </button>
                 );
               })}
