@@ -5,6 +5,7 @@ import Button from "../../components/Button/Button";
 
 export default function MainArtist() {
   const navigate = useNavigate();
+
   return (
     <div className="introContainer">
       <div className="boxContainer">
