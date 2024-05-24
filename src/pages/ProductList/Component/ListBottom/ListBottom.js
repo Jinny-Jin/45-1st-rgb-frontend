@@ -7,10 +7,11 @@ import "./ListBottom.scss";
 
 function ListBottom() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const offset = searchParams.get("offset") || 0;
-  const limit = searchParams.get("limit") || 10;
   const [shopContent, setShopContent] = useState([]);
   const [page, setPage] = useState(false);
+  const offset = searchParams.get("offset") || 0;
+  const limit = searchParams.get("limit") || shopContent?.length;
+  const pageCount = Math.ceil(shopContent?.length / 4) || 0;
 
   useEffect(() => {
     const url = `${API_ADDRESS_ORDERS}products/all?limit=${limit}&offset=${offset}`;
@@ -43,13 +44,12 @@ function ListBottom() {
 
   const movePage = pageNumber => {
     searchParams.set("offset", (pageNumber - 1) * 4);
-    searchParams.set("limit", 4);
     setSearchParams(searchParams);
   };
 
   return (
     <div className="listBottom">
-      <div className="bottomTop">
+      <div className="pagination">
         <div className="category">
           <span onClick={showAll}>All</span>
           <span onClick={showFour}>
@@ -61,14 +61,14 @@ function ListBottom() {
           </span>
         </div>
       </div>
-      <div className="bottomBottom">
-        <div className="bottomLeft">
+      <div className="itemList">
+        <div className="listSorting">
           <LeftFilter
             shopContent={shopContent}
             setShopContent={setShopContent}
           />
         </div>
-        <div className="bottomRight">
+        <div className="listMain">
           <div className="artworkBox">
             {shopContent.map(art => {
               return (
@@ -80,27 +80,18 @@ function ListBottom() {
           </div>
           {page ? (
             <div className="pageButton">
-              <button
-                onClick={() => {
-                  movePage(1);
-                }}
-              >
-                1
-              </button>
-              <button
-                onClick={() => {
-                  movePage(2);
-                }}
-              >
-                2
-              </button>
-              <button
-                onClick={() => {
-                  movePage(3);
-                }}
-              >
-                3
-              </button>
+              {pageCount.map(page => {
+                return (
+                  <button
+                    key={page}
+                    onClick={() => {
+                      movePage(page);
+                    }}
+                  >
+                    page
+                  </button>
+                );
+              })}
             </div>
           ) : (
             ""

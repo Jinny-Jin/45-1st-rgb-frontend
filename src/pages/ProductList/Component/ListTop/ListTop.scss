@@ -1,29 +1,23 @@
-div.listTop {
-  .topOfTop {
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    padding: 15px 35px;
+.top {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  padding: 15px 35px;
 
-    .artistOfMay {
-      width: 504px;
-      font-size: 37px;
-      font-weight: 600;
-    }
+  .artistOfMay {
+    width: 504px;
+    font-size: 37px;
+    font-weight: 600;
+  }
 
-    .haechan {
-      font-size: 21px;
-      font-weight: 400;
-    }
+  .artistName {
+    font-size: 21px;
+    font-weight: 400;
   }
-  // img {
-  //   width: 100%;
-  //   height: 331px;
-  // }
-  .imageImage {
-    width: 100%;
-    height: 330px;
-    background-image: url("https://github.com/haechan02/rgb_demo_arts/blob/d753962f9aa85bc1508500c92eba6b434ca489db/assets/arts/arts%209.jpeg?raw=true");
-    background-size: cover;
-  }
+}
+.bannerImage {
+  width: 100%;
+  height: 330px;
+  background-image: url("https://github.com/haechan02/rgb_demo_arts/blob/d753962f9aa85bc1508500c92eba6b434ca489db/assets/arts/arts%209.jpeg?raw=true");
+  background-size: cover;
 }

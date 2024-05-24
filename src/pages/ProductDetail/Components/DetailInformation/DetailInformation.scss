@@ -17,7 +17,7 @@
   .infoTop {
     border-bottom: 1px solid black;
 
-    p.size {
+    .size {
       padding-bottom: 30px;
       font-size: 14px;
     }
@@ -83,14 +83,14 @@
     }
   }
 
-  .buyingButtons {
+  .buying {
     .totalPrice {
       display: flex;
       justify-content: space-between;
       padding: 20px 20px 40px 0;
     }
 
-    .buttons {
+    .buyingButton {
       text-align: center;
     }
   }

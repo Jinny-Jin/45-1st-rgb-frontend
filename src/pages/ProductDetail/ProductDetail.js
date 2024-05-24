@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import Location from "./Components/Location/Location";
+import { Link, useParams } from "react-router-dom";
 import ImageBox from "./Components/ImageBox/ImageBox";
 import DetailInformation from "./Components/DetailInformation/DetailInformation";
 import ProductDescription from "./ProductDescription";
@@ -13,16 +12,7 @@ function ProductDetail() {
   const [inOut, setInOut] = useState(false);
   const [soldOut, setSoldOut] = useState(false);
   const params = useParams();
-
   const productId = params.id;
-
-  const showMore = () => {
-    setInOut(true);
-  };
-
-  const noMore = () => {
-    setInOut(false);
-  };
 
   useEffect(() => {
     const url = `${API_ADDRESS_ORDERS}products/${productId}`;
@@ -40,21 +30,29 @@ function ProductDetail() {
   return (
     <>
       {logIn}
-      <div className="productDetail">
-        <div className="description">
+      <div className="detailPage">
+        <div>
           <ProductDescription details={details} inOut={inOut} />
         </div>
-        <div className="productDetailBox">
-          <Location />
-          <div className="detailBox">
-            <div className="leftImage">
+        <div className="main">
+          <div className="location">
+            <p>Shop</p>
+            <button>
+              <Link to="/productList/all">
+                <img alt="arrow" src="/images/productDetail/arrow2.png" />
+              </Link>
+            </button>
+          </div>
+          <div className="informations">
+            <div className="productImage">
               {soldOut && <div className="soldOut">Sold Out</div>}
-              <ImageBox details={details} inOut={inOut} />
+              <ImageBox details={details} />
             </div>
-            <div className="detailInfo">
+            <div className="productInfo">
               <DetailInformation
                 setLogIn={setLogIn}
                 details={details}
+                soldOut={soldOut}
                 setSoldOut={setSoldOut}
                 inOut={inOut}
                 setInOut={setInOut}

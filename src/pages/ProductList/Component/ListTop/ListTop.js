@@ -3,12 +3,12 @@ import "./ListTop.scss";
 
 function ListTop() {
   return (
-    <div className="listTop">
-      <div className="topOfTop">
+    <div>
+      <div className="top">
         <span className="artistOfMay">Artist of May</span>
-        <span className="haechan">Hae</span>
+        <span className="artistName">Hae</span>
       </div>
-      <div className="imageImage" />
+      <div className="bannerImage" />
     </div>
   );
 }

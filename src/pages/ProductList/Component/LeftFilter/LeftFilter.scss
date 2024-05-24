@@ -8,8 +8,8 @@ div.leftFilter {
     padding-right: 10px;
   }
 
-  .filterContent {
-    .priceAndButton {
+  .sortingContent {
+    .showButton {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -27,17 +27,17 @@ div.leftFilter {
       }
     }
 
-    .contentButton {
+    .priceAndNameButton {
       padding-bottom: 10px;
     }
   }
-}
 
-.sorting {
-  padding-bottom: 10px;
+  .sorting {
+    padding-bottom: 10px;
 
-  &:active,
-  &:hover {
-    background-color: $main-ivory;
+    &:active,
+    &:hover {
+      background-color: $main-ivory;
+    }
   }
 }
