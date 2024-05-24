@@ -77,7 +77,7 @@ Uploading Untitled-2.mp4…
 - 전면에 영상을 배치하여 사이트를 처음 방문하는 사용자의 관심도를 높임 <br>
 - 2개의 Art / Goods Carousel UI 으로 다양한 콘텐츠를 한눈에 볼 수 있게 구현 <br>
 => 사이트 내부를 적극적으로 홍보할 수 있도록 기획/구현 <br>
-- Carousel 밑으 indicator를 배치하여 사용자에게 현재 위치를 알 수 있게 구현 <br>
+- Carousel 밑의 indicator를 배치하여 사용자에게 현재 위치를 알 수 있게 구현 <br>
 
 
 ## Login/Sign Up
