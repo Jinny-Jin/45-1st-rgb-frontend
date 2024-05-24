@@ -5,7 +5,14 @@ import { API_ADDRESS_ORDERS } from "../../../../utils/API_ADDRESS";
 
 import "./DetailInformation.scss";
 
-function DetailInformation({ details, setLogIn, setSoldOut, inOut, setInOut }) {
+function DetailInformation({
+  details,
+  setLogIn,
+  soldOut,
+  setSoldOut,
+  inOut,
+  setInOut,
+}) {
   const {
     quantity,
     id,
@@ -19,42 +26,23 @@ function DetailInformation({ details, setLogIn, setSoldOut, inOut, setInOut }) {
   } = details;
 
   const [count, setCount] = useState(1);
-  const total = count * price;
-  const [button1, setButton1] = useState(false);
-  const [totalQuantity, setTotalQuantity] = useState(true);
+  const [cart, setCart] = useState(false);
   const token = localStorage.getItem("TOKEN");
-
-  useEffect(() => {
-    if (button1) {
-      token ? postCart() : setLogIn(<User setLogIn={setLogIn} />);
-    }
-  }, [button1]);
+  const total = count * price;
 
   const cartButton = () => {
-    setButton1(!button1);
+    setCart(!cart);
   };
+
   const plusCount = () => {
-    setCount(count + 1);
-    if (count === quantity) {
-      setCount(count + 0);
-    }
+    if (count < quantity) setCount(count + 1);
   };
 
   const minusCount = () => {
-    setCount(count - 1);
-    if (count === 1) {
-      setCount(count - 0);
-    }
+    if (count > 1) setCount(count - 1);
   };
 
-  useEffect(() => {
-    if (details.quantity <= 0) {
-      setTotalQuantity(false);
-      setSoldOut(true);
-    }
-  }, [totalQuantity, details.quantity]);
-
-  const postCart = () => {
+  const addToCart = () => {
     const url = `${API_ADDRESS_ORDERS}carts`;
 
     fetch(url, {
@@ -70,6 +58,16 @@ function DetailInformation({ details, setLogIn, setSoldOut, inOut, setInOut }) {
     }).then(res => res.json());
     alert("카트에 성공적으로 담겼습니다");
   };
+
+  useEffect(() => {
+    if (cart) {
+      token ? addToCart() : setLogIn(<User setLogIn={setLogIn} />);
+    }
+  }, [cart]);
+
+  useEffect(() => {
+    if (quantity < 1) setSoldOut(true);
+  }, [quantity]);
 
   return (
     <div className="detailInformation">
@@ -100,12 +98,12 @@ function DetailInformation({ details, setLogIn, setSoldOut, inOut, setInOut }) {
         </div>
         <div className="quantity">
           <span className="bold">수량</span>
-          {totalQuantity ? (
+          {quantity > 0 ? (
             <div className="countButton">
               <button className="minusButton" onClick={minusCount}>
                 -
               </button>
-              {count}/{details.quantity}
+              {count}/{quantity}
               <button className="plusButton" onClick={plusCount}>
                 +
               </button>
@@ -115,19 +113,23 @@ function DetailInformation({ details, setLogIn, setSoldOut, inOut, setInOut }) {
           )}
         </div>
       </div>
-      <div className="buyingButtons">
+      <div className="buying">
         <div className="totalPrice">
           <span className="bold">총 가격</span>
           <span>{`${total} point`}</span>
         </div>
-        <div className="buttons">
-          <Button
-            buttonColor="bright"
-            buttonSize="bigButton"
-            action={cartButton}
-          >
-            카트 추가
-          </Button>
+        <div className="buyingButton">
+          {soldOut ? (
+            <span>구매 불가</span>
+          ) : (
+            <Button
+              buttonColor="bright"
+              buttonSize="bigButton"
+              action={cartButton}
+            >
+              카트 추가
+            </Button>
+          )}
         </div>
       </div>
     </div>

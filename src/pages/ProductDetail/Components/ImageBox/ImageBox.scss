@@ -1,4 +1,4 @@
-div.detailLeft {
+.detailImage {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -24,7 +24,7 @@ div.detailLeft {
     .inner {
       transform: 0.3s;
       white-space: nowrap;
-      .itemImage {
+      .item {
         width: 500px;
         height: 500px;
       }
